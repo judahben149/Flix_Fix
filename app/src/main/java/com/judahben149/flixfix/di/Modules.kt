@@ -39,12 +39,13 @@ object Modules {
     @Singleton
     @Provides
     fun providesHttpClient(@ApplicationContext context: Context): OkHttpClient {
+        val apiKey = context.getString(R.string.api_key)
+
         val loggingInterceptor = HttpLoggingInterceptor()
 
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
 
-        val apiKey = context.getString(R.string.api_key)
 
         val requestInterceptor = Interceptor { chain ->
             val url = chain.request()
