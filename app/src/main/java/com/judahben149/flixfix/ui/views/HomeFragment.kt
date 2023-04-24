@@ -15,6 +15,7 @@ import com.judahben149.flixfix.domain.mappers.MovieMapper
 import com.judahben149.flixfix.ui.adapters.MovieListAdapter
 import com.judahben149.flixfix.ui.viewmodels.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -23,6 +24,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     lateinit var recyclerView: RecyclerView
+    @Inject
     lateinit var adapter: MovieListAdapter
 
     val navController by lazy {
@@ -41,7 +43,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = MovieListAdapter()
         recyclerView = binding.rvMovieList
         recyclerView.adapter = adapter
 
