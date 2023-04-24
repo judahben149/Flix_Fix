@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.judahben149.flixfix.data.api.response.DiscoverMoviesDto
 import com.judahben149.flixfix.data.repository.MovieRepository
+import com.judahben149.flixfix.data.repository.MovieRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,7 +17,7 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
-class MovieViewModel @Inject constructor(private val repository: MovieRepository): ViewModel() {
+class MovieViewModel @Inject constructor(private val repository: MovieRepositoryImpl): ViewModel() {
 
     private val _movies: MutableLiveData<DiscoverMoviesDto?> = MutableLiveData()
     val movies: LiveData<DiscoverMoviesDto?> get() = _movies

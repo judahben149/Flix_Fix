@@ -6,18 +6,22 @@ import com.judahben149.flixfix.data.api.MoviesService
 import com.judahben149.flixfix.data.repository.MovieRepository
 import com.judahben149.flixfix.data.repository.MovieRepositoryImpl
 import com.judahben149.flixfix.utils.Constants
+import com.judahben149.flixfix.utils.Constants.API_KEY
+import com.judahben149.flixfix.utils.Constants.BASE_URL
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import kotlin.math.log
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -25,16 +29,37 @@ object Modules {
 
     @Singleton
     @Provides
-    fun providesHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().apply {
-            readTimeout(10, TimeUnit.SECONDS)
-            writeTimeout(10, TimeUnit.SECONDS)
+    fun providesBaseUrl(): String {
+        return BASE_URL
+    }
 
-            val logger = HttpLoggingInterceptor().apply {
-            setLevel(HttpLoggingInterceptor.Level.BODY)
-            }
-            if (BuildConfig.DEBUG) addInterceptor(logger)
-        }.build()
+    @Singleton
+    @Provides
+    fun providesHttpClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor()
+
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
+
+        val requestInterceptor = Interceptor { chain ->
+            val url = chain.request()
+                .url
+                .newBuilder()
+                .addQueryParameter("api_key", API_KEY)
+                .build()
+
+            val request = chain.request()
+                .newBuilder()
+                .url(url)
+                .build()
+            return@Interceptor chain.proceed(request)
+        }
+
+        return OkHttpClient.Builder()
+
+            .addInterceptor(requestInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .build()
     }
 
     @Singleton
@@ -61,8 +86,8 @@ object Modules {
 
     @Singleton
     @Provides
-    fun providesMovieRepository(apiClient: ApiClient): MovieRepository {
-        return MovieRepositoryImpl(apiClient)
+    fun providesMovieRepository(apiClient: ApiClient, moviesService: MoviesService): MovieRepositoryImpl {
+        return MovieRepositoryImpl(apiClient, moviesService)
     }
 
     @Singleton

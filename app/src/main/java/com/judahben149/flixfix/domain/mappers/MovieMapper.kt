@@ -10,7 +10,8 @@ object MovieMapper {
             id = discoverMoviesResponse.id,
             backdropPath = discoverMoviesResponse.backdrop_path,
             title = discoverMoviesResponse.title,
-            releaseDate = discoverMoviesResponse.release_date
+            releaseDate = discoverMoviesResponse.release_date,
+            posterPath = discoverMoviesResponse.poster_path
         )
     }
 }

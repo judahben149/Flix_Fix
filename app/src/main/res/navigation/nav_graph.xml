@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/HomeFragment"
         android:name="com.judahben149.flixfix.ui.views.HomeFragment"
-        android:label="@string/home_fragment_label"
+        android:label="@string/discover_label"
         tools:layout="@layout/fragment_home">
 
         <action
