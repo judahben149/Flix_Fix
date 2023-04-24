@@ -1,6 +1,8 @@
 package com.judahben149.flixfix.di
 
+import android.content.Context
 import androidx.viewbinding.BuildConfig
+import com.judahben149.flixfix.R
 import com.judahben149.flixfix.data.api.ApiClient
 import com.judahben149.flixfix.data.api.MoviesService
 import com.judahben149.flixfix.data.repository.MovieRepository
@@ -13,6 +15,7 @@ import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -35,17 +38,19 @@ object Modules {
 
     @Singleton
     @Provides
-    fun providesHttpClient(): OkHttpClient {
+    fun providesHttpClient(@ApplicationContext context: Context): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
 
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
 
+        val apiKey = context.getString(R.string.api_key)
+
         val requestInterceptor = Interceptor { chain ->
             val url = chain.request()
                 .url
                 .newBuilder()
-                .addQueryParameter("api_key", API_KEY)
+                .addQueryParameter("api_key", apiKey)
                 .build()
 
             val request = chain.request()
