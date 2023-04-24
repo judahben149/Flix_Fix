@@ -5,5 +5,6 @@ data class Movie(
     val backdropPath: String = "",
     val title: String = "",
     val releaseDate: String = "",
+    val posterPath: String = ""
 //    val genreIds: List<Int> = emptyList()
 )

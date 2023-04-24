@@ -17,7 +17,8 @@
             android:id="@+id/iv_movie_image"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
-            android:maxWidth="120dp"
+            android:maxWidth="60dp"
+            android:layout_marginStart="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,6 +29,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_marginStart="@dimen/margin_start_5dp"
+            android:layout_marginEnd="@dimen/margin_end_5dp"
             app:layout_constraintStart_toEndOf="@id/iv_movie_image"
             app:layout_constraintEnd_toEndOf="parent" >
 
@@ -43,6 +46,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_movie_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="2023"
@@ -66,8 +70,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 </com.google.android.material.card.MaterialCardView>
