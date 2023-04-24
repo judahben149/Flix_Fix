@@ -2,7 +2,7 @@
     <string name="app_name">Flix Fix</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="home_fragment_label">Home Fragment</string>
+    <string name="discover_label">Discover</string>
     <string name="movie_detail_fragment_label">Movie Detail Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
