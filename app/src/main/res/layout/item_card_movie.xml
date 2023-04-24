@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:elevation="@dimen/card_elevation_5dp"
     android:layout_marginTop="12dp"
+    app:strokeWidth="0.7dp"
+    android:id="@+id/card_item_movie"
     android:layout_marginHorizontal="@dimen/card_margin_horizontal_10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,9 +17,10 @@
 
         <ImageView
             android:id="@+id/iv_movie_image"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="80dp"
             android:maxWidth="60dp"
+            android:maxHeight="80dp"
             android:layout_marginStart="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,12 +1,18 @@
 package com.judahben149.flixfix.ui.adapters
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 import com.judahben149.flixfix.R
 import com.judahben149.flixfix.databinding.ItemCardMovieBinding
 import com.judahben149.flixfix.domain.entity.Movie
@@ -15,7 +21,7 @@ import com.judahben149.flixfix.utils.Extensions.parseFriendlyDate
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
-class MovieListAdapter @Inject constructor(@ActivityContext private val context: Context) :
+class MovieListAdapter(private val context: Context, private val onMovieItemClicked: (id: String) -> Unit) :
     ListAdapter<Movie, MovieListAdapter.MovieListViewHolder>(
         MovieListDiffUtil()
     ) {
@@ -25,10 +31,12 @@ class MovieListAdapter @Inject constructor(@ActivityContext private val context:
         fun bindItem(movieItem: Movie) {
             binding.tvMovieName.text = movieItem.title
             binding.tvMovieDate.text = parseFriendlyDate(movieItem.releaseDate)
+            binding.cardItemMovie.setOnClickListener {
+                onMovieItemClicked(movieItem.id.toString())
+            }
 
             Glide.with(context)
                 .load(Constants.BACKDROP_BASE_URL + movieItem.posterPath)
-                .placeholder(R.drawable.placeholder)
                 .into(binding.ivMovieImage)
         }
     }

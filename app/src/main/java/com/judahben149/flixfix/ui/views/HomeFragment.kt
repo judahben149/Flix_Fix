@@ -24,7 +24,6 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     lateinit var recyclerView: RecyclerView
-    @Inject
     lateinit var adapter: MovieListAdapter
 
     val navController by lazy {
@@ -42,6 +41,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        adapter = MovieListAdapter(requireContext()) {movieId ->
+            Snackbar.make(binding.root, movieId, Snackbar.LENGTH_SHORT).show()
+        }
 
         recyclerView = binding.rvMovieList
         recyclerView.adapter = adapter
