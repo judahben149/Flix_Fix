@@ -9,5 +9,5 @@ import retrofit2.http.Header
 interface MoviesService {
 
     @GET("discover/movie")
-    suspend fun fetchDiscoverMoviesList(@Header("api_key") apiKey: String): Response<DiscoverMoviesDto>
+    suspend fun fetchDiscoverMoviesList(): Response<DiscoverMoviesDto>
 }

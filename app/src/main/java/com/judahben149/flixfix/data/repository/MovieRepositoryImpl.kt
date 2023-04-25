@@ -11,7 +11,7 @@ class MovieRepositoryImpl @Inject constructor(private val apiClient: ApiClient, 
     suspend fun fetchMovieList(): DiscoverMoviesDto? {
         Log.d("jj","Repository - fetching fxn called")
 
-        val discoverMoviesRequest = moviesService.fetchDiscoverMoviesList("30239e3691bfcb7c062c8383a63cf7a9")
+        val discoverMoviesRequest = moviesService.fetchDiscoverMoviesList()
 
         if (discoverMoviesRequest.isSuccessful) {
             return discoverMoviesRequest.body()!!
