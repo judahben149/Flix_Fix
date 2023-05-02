@@ -8,10 +8,7 @@ import com.judahben149.flixfix.data.api.MoviesService
 import com.judahben149.flixfix.data.repository.MovieRepository
 import com.judahben149.flixfix.data.repository.MovieRepositoryImpl
 import com.judahben149.flixfix.utils.Constants
-import com.judahben149.flixfix.utils.Constants.API_KEY
 import com.judahben149.flixfix.utils.Constants.BASE_URL
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,7 +18,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import kotlin.math.log
@@ -70,19 +67,19 @@ object Modules {
 
     @Singleton
     @Provides
-    fun providesRetrofitInstance(moshi: Moshi, httpClient: OkHttpClient): Retrofit {
+    fun providesRetrofitInstance(httpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient)
             .build()
     }
 
-    @Singleton
-    @Provides
-    fun providesMoshi(): Moshi {
-        return Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
-    }
+//    @Singleton
+//    @Provides
+//    fun providesMoshi(): Moshi {
+//        return Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
+//    }
 
     @Singleton
     @Provides
@@ -92,8 +89,8 @@ object Modules {
 
     @Singleton
     @Provides
-    fun providesMovieRepository(apiClient: ApiClient, moviesService: MoviesService): MovieRepositoryImpl {
-        return MovieRepositoryImpl(apiClient, moviesService)
+    fun providesMovieRepository(moviesService: MoviesService): MovieRepositoryImpl {
+        return MovieRepositoryImpl(moviesService)
     }
 
     @Singleton
