@@ -5,11 +5,16 @@ import java.util.Locale
 
 object Extensions {
 
-    fun parseFriendlyDate(inputDate: String): String {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val date = inputFormat.parse(inputDate)
+    fun parseFriendlyDate(inputDate: String?): String {
 
-        val outputFormat = SimpleDateFormat("dd MMM, yyyy", Locale.getDefault())
-        return outputFormat.format(date!!)
+        if (inputDate != null) {
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val date = inputFormat.parse(inputDate)
+
+                val outputFormat = SimpleDateFormat("dd MMM, yyyy", Locale.getDefault())
+                return outputFormat.format(date!!)
+        } else {
+            return "none"
+        }
     }
 }
