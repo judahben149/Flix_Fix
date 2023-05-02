@@ -1,9 +1,11 @@
 package com.judahben149.flixfix.data.repository
 
-import com.judahben149.flixfix.data.api.response.DiscoverMoviesDto
+import androidx.paging.PagingData
+import com.judahben149.flixfix.data.api.response.DiscoverMoviesDataDto
+import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
 
-    suspend fun fetchMovieList(): DiscoverMoviesDto?
+    fun fetchDiscoverMovieList(): Flow<PagingData<DiscoverMoviesDataDto>>
 
 }
