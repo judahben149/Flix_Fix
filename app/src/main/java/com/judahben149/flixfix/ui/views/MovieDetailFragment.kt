@@ -30,7 +30,7 @@ class MovieDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_MovieDetailFragment_to_HomeFragment)
+//            findNavController().navigate(R.id.action_MovieDetailFragment_to_HomeFragment)
         }
     }
 

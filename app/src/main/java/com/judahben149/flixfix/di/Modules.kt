@@ -29,12 +29,6 @@ object Modules {
 
     @Singleton
     @Provides
-    fun providesBaseUrl(): String {
-        return BASE_URL
-    }
-
-    @Singleton
-    @Provides
     fun providesHttpClient(@ApplicationContext context: Context): OkHttpClient {
         val apiKey = context.getString(R.string.api_key)
 
@@ -74,12 +68,6 @@ object Modules {
             .client(httpClient)
             .build()
     }
-
-//    @Singleton
-//    @Provides
-//    fun providesMoshi(): Moshi {
-//        return Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
-//    }
 
     @Singleton
     @Provides
