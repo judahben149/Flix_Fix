@@ -9,7 +9,9 @@ import okio.IOException
 import retrofit2.HttpException
 
 private const val STARTING_PAGE_INDEX = 1
+
 class DiscoverMoviesPagingDataSource(private val service: MoviesService): PagingSource<Int, DiscoverMoviesDataDto>() {
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DiscoverMoviesDataDto> {
         return try {
             val currentPage = params.key ?: STARTING_PAGE_INDEX
@@ -43,75 +45,3 @@ class DiscoverMoviesPagingDataSource(private val service: MoviesService): Paging
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DiscoverMoviesDataDto> {
-//        val pageNumber = params.key ?: 1
-//
-//        return try {
-//            Log.d(Constants.TAG, "Paging Data Source Load fxn called")
-//
-//            val response = movieService.fetchDiscoverMoviesList(pageNumber)
-//            val pagedResponse = response.body()
-//            val data = pagedResponse?.data
-//
-//            var nextPageNumber: Int? = null
-//            if (pagedResponse?.page != pagedResponse?.total_pages) {
-//                nextPageNumber = pagedResponse?.page?.plus(1)
-//            }
-//
-//            LoadResult.Page(
-//                data = data.orEmpty(),
-//                prevKey = null,
-//                nextKey = nextPageNumber
-//            )
-//        } catch (ex: Exception) {
-//            LoadResult.Error(ex)
-//        }
-//
-//    }
-//
-//    override fun getRefreshKey(state: PagingState<Int, DiscoverMoviesDataDto>): Int? {
-//        Log.d(Constants.TAG, "Paging Data Source Refresh keys fxn called")
-//
-//        return state.anchorPosition?.let { anchorPosition ->
-//            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
-//                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
-//        }
-//    }
-//}
