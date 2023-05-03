@@ -29,9 +29,6 @@ class MovieDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSecond.setOnClickListener {
-//            findNavController().navigate(R.id.action_MovieDetailFragment_to_HomeFragment)
-        }
     }
 
     override fun onDestroyView() {
