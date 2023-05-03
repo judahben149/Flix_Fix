@@ -33,9 +33,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var recyclerView: RecyclerView
-    private var adapter: MovieListAdapter? = null
-
     val navController by lazy {
         findNavController()
     }
@@ -52,42 +49,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initViews()
-        collectUiState()
+
     }
 
-    private fun collectUiState() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.movieList.collectLatest { movies ->
-                    adapter?.submitData(movies)
-                }
-            }
-        }
 
 
-//        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-//            adapter?.loadStateFlow?.collect {
-//                val state = it.refresh
-//                footerBinding?.prgBarLoadMore?.isVisible = state is LoadState.Loading
-//            }
-//        }
-    }
-
-    private fun initViews() {
-        adapter = MovieListAdapter(requireContext()) { movieId ->
-            Snackbar.make(binding.root, movieId, Snackbar.LENGTH_SHORT).show()
-        }
-
-        recyclerView = binding.rvMovieList
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        adapter = null
         _binding = null
     }
 }
