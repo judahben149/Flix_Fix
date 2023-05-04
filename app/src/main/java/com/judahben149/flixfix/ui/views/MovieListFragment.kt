@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,9 +51,14 @@ class MovieListFragment : Fragment() {
 
     private fun initViews() {
         adapter = MovieListAdapter(requireContext()) { id ->
-                Toast.makeText(requireContext(), id.toString(), Toast.LENGTH_SHORT).show()
+//            Toast.makeText(requireContext(), id.toString(), Toast.LENGTH_SHORT).show()
+            val bundle = Bundle()
+            bundle.putInt("MOVIE_ID", id)
+            findNavController().navigate(R.id.MovieDetailFragment, bundle)
         }
-        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        val layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recyclerView = binding.rvDiscoverMovies
         recyclerView.adapter = adapter.withLoadStateFooter(
             LoadMoreAdapter {

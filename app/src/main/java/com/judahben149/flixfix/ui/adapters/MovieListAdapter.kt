@@ -25,21 +25,21 @@ import javax.inject.Inject
 
 class MovieListAdapter(
     private val context: Context,
-    private val onMovieItemClicked: (id: String) -> Unit
-) : PagingDataAdapter<DiscoverMoviesDataDto, MovieListAdapter.MovieListViewHolder>(MoviesAdapterDiffer()) {
+    private val onMovieItemClicked: (id: Int) -> Unit
+) : PagingDataAdapter<Movie, MovieListAdapter.MovieListViewHolder>(MoviesAdapterDiffer()) {
 
     inner class MovieListViewHolder(val binding: ItemCardMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindItem(movieItem: DiscoverMoviesDataDto) {
+        fun bindItem(movieItem: Movie) {
             binding.tvMovieName.text = movieItem.title
-            binding.tvMovieDate.text = parseFriendlyDate(movieItem.release_date)
+            binding.tvMovieDate.text = movieItem.releaseDate.parseFriendlyDate()
             binding.cardItemMovie.setOnClickListener {
-                onMovieItemClicked(movieItem.id.toString())
+                onMovieItemClicked(movieItem.id)
             }
 
             Glide.with(context)
-                .load(Constants.BACKDROP_BASE_URL + movieItem.poster_path)
+                .load(Constants.BACKDROP_BASE_URL + movieItem.posterPath)
                 .into(binding.ivMovieImage)
         }
     }
@@ -55,17 +55,17 @@ class MovieListAdapter(
     }
 
 
-    class MoviesAdapterDiffer() : DiffUtil.ItemCallback<DiscoverMoviesDataDto>() {
+    class MoviesAdapterDiffer() : DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(
-            oldItem: DiscoverMoviesDataDto,
-            newItem: DiscoverMoviesDataDto
+            oldItem: Movie,
+            newItem: Movie
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: DiscoverMoviesDataDto,
-            newItem: DiscoverMoviesDataDto
+            oldItem: Movie,
+            newItem: Movie
         ): Boolean {
             return oldItem == newItem
         }
