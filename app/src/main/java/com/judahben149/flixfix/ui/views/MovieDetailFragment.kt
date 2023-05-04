@@ -23,6 +23,7 @@ import com.judahben149.flixfix.utils.Extensions.loadImage
 import com.judahben149.flixfix.utils.Extensions.parseFriendlyDate
 import com.judahben149.flixfix.utils.Extensions.toRunTimeString
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
@@ -61,6 +62,8 @@ class MovieDetailFragment : Fragment() {
         binding.tvMovieTitle.text = movieDetails.title
         binding.tvReleaseDate.text = "Release Date: " + movieDetails.release_date.parseFriendlyDate()
         binding.tvRuntime.text = "Runtime: " + movieDetails.runtime.toRunTimeString()
+        binding.tvRating.text = DecimalFormat("#.#").format(movieDetails.vote_average).toString()
+
 
         binding.ivPosterImage.loadImage(requireContext(), Constants.BACKDROP_BASE_URL + movieDetails.poster_path) { }
 
