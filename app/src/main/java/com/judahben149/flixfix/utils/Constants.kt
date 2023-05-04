@@ -6,5 +6,7 @@ object Constants {
     const val BACKDROP_BASE_URL = "https://image.tmdb.org/t/p/original/"
     const val NETWORK_PAGE_SIZE = 20
 
+    const val MOVIE_DATABASE = "movie_database"
+
     const val TAG = "meme"
 }
