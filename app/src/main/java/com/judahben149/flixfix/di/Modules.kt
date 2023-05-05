@@ -1,7 +1,7 @@
 package com.judahben149.flixfix.di
 
 import android.content.Context
-import androidx.viewbinding.BuildConfig
+import com.judahben149.flixfix.BuildConfig
 import com.judahben149.flixfix.R
 import com.judahben149.flixfix.data.api.ApiClient
 import com.judahben149.flixfix.data.api.MoviesService
@@ -30,7 +30,7 @@ object Modules {
     @Singleton
     @Provides
     fun providesHttpClient(@ApplicationContext context: Context): OkHttpClient {
-        val apiKey = context.getString(R.string.api_key)
+        val apiKey = BuildConfig.API_KEY
 
         val loggingInterceptor = HttpLoggingInterceptor()
 
