@@ -1,7 +1,7 @@
 package com.judahben149.flixfix.domain.mappers
 
-import com.judahben149.flixfix.data.api.response.DiscoverMoviesDataDto
-import com.judahben149.flixfix.data.api.response.MovieDto
+import com.judahben149.flixfix.data.remote.response.DiscoverMoviesDataDto
+import com.judahben149.flixfix.data.remote.response.MovieDto
 import com.judahben149.flixfix.domain.entity.Movie
 import com.judahben149.flixfix.domain.entity.MovieDetailedEntity
 

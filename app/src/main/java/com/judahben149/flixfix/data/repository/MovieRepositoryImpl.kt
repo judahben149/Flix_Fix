@@ -4,10 +4,10 @@ import androidx.annotation.WorkerThread
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.judahben149.flixfix.data.DiscoverMoviesPagingDataSource
-import com.judahben149.flixfix.data.api.MoviesService
-import com.judahben149.flixfix.data.api.response.DiscoverMoviesDataDto
-import com.judahben149.flixfix.data.api.response.MovieDto
+import com.judahben149.flixfix.data.paging.DiscoverMoviesPagingDataSource
+import com.judahben149.flixfix.data.remote.MoviesService
+import com.judahben149.flixfix.data.remote.response.DiscoverMoviesDataDto
+import com.judahben149.flixfix.data.remote.response.MovieDto
 import com.judahben149.flixfix.utils.Constants.NETWORK_PAGE_SIZE
 import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.flow.Flow
