@@ -1,22 +1,13 @@
 package com.judahben149.flixfix.ui.views
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import com.google.android.material.snackbar.Snackbar
-import com.judahben149.flixfix.R
 import com.judahben149.flixfix.databinding.FragmentMovieDetailBinding
-import com.judahben149.flixfix.domain.entity.MovieDetailedEntity
+import com.judahben149.flixfix.domain.entity.MovieModel
 import com.judahben149.flixfix.ui.viewmodels.MovieViewModel
 import com.judahben149.flixfix.utils.Constants
 import com.judahben149.flixfix.utils.Extensions.loadImage
@@ -57,7 +48,7 @@ class MovieDetailFragment : Fragment() {
         viewModel.getMovieDetails(movieId)
     }
 
-    private fun setViews(movieDetails: MovieDetailedEntity) {
+    private fun setViews(movieDetails: MovieModel) {
         binding.tvOverviewMovieDetail.text = movieDetails.overview
         binding.tvMovieTitle.text = movieDetails.title
         binding.tvReleaseDate.text = "Release Date: " + movieDetails.release_date.parseFriendlyDate()
