@@ -40,6 +40,9 @@ android {
     kapt {
         correctErrorTypes true
     }
+    lintOptions {
+        lintConfig = file("$rootDir/glide_notification_lint_ignore.xml")
+    }
 }
 
 dependencies {
