@@ -7,11 +7,30 @@ on:
 
 
 jobs:
-  build:
+  apk:
+    permissions:
+      contents: write
+    name: Generate and release APK
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Release APK
-        uses: ShowMeThe/github_action_release@v0.01
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: Setup JDK
+        uses: actions/setup-java@v3
         with:
+          distribution: 'adopt'
+          java-version: '11'
+          cache: gradle
+      - name: Set execution flag for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: Build APK
+        run: ./gradlew assembleRelease
+      - name: upload apk
+        uses: actions/upload-release-asset@v1
+        env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          asset_name: Flix Fix.apk
+          asset_content_type: application/zip
