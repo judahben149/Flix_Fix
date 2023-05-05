@@ -2,6 +2,7 @@ package com.judahben149.flixfix.di
 
 import android.content.Context
 import com.judahben149.flixfix.R
+import com.judahben149.flixfix.data.local.MovieDao
 import com.judahben149.flixfix.data.remote.ApiClient
 import com.judahben149.flixfix.data.remote.MoviesService
 import com.judahben149.flixfix.data.repository.MovieRepositoryImpl
@@ -72,8 +73,8 @@ object Modules {
 
     @Singleton
     @Provides
-    fun providesMovieRepository(moviesService: MoviesService): MovieRepositoryImpl {
-        return MovieRepositoryImpl(moviesService)
+    fun providesMovieRepository(moviesService: MoviesService, movieDao: MovieDao): MovieRepositoryImpl {
+        return MovieRepositoryImpl(moviesService, movieDao)
     }
 
     @Singleton
