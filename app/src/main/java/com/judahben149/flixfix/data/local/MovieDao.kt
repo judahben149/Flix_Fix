@@ -7,17 +7,18 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.judahben149.flixfix.data.local.entity.MovieEntity
 import com.judahben149.flixfix.data.local.entity.MovieEntityRemoteKey
+import com.judahben149.flixfix.data.local.entity.MovieListEntity
 
 @Dao
 interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovies(movieEntity: List<MovieEntity>)
+    suspend fun insertMovies(movieEntity: List<MovieListEntity>)
 
-    @Query("SELECT * FROM MovieEntity")
-    fun getAllMovies(): PagingSource<Int, MovieEntity>
+    @Query("SELECT * FROM MovieListEntity")
+    fun getAllMovies(): PagingSource<Int, MovieListEntity>
 
-    @Query("DELETE FROM MovieEntity")
+    @Query("DELETE FROM MovieListEntity")
     suspend fun deleteAllArticles()
 
 
@@ -25,8 +26,8 @@ interface MovieDao {
     suspend fun insertAllRemoteKeys(movieEntityRemoteKeys: List<MovieEntityRemoteKey>)
 
     @Query("SELECT * FROM MovieEntityRemoteKey WHERE id = :id")
-    fun getAllRemoteKeys(id: String): MovieEntityRemoteKey?
+    suspend fun getAllRemoteKeys(id: Int): MovieEntityRemoteKey?
 
     @Query("DELETE FROM MovieEntityRemoteKey")
-    fun deleteAllRemoteKeys()
+    suspend fun deleteAllRemoteKeys()
 }
