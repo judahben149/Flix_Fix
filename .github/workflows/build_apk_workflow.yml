@@ -42,9 +42,11 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: Flixfix
+          path: artifacts
+
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: actions/create-release@v1
         with:
           tag_name: v1.0.0.3
           release_name: Release  v1.0.0.3
@@ -52,11 +54,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1.0.1
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: Flixfix/Flixfix.apk
+          asset_path: artifacts/Flixfix.apk
           asset_name: FlixFix.apk
           asset_content_type: application/zip
