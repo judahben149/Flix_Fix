@@ -58,7 +58,15 @@ jobs:
           apk_path=$(find app/build/outputs/apk/ -name "*.apk" -type f)
           echo "::set-output name=apk_path::$apk_path"
 
-      - name: Create Release
+      - name: Delete Previous Release
+        uses: actions/delete-release@v1
+        with:
+          token: ${{ secrets.TOKEN }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.repository }}
+          tag_name: v0-latest
+
+      - name: Create Another Release
         id: create_release
         uses: actions/create-release@v1
         with:
@@ -78,10 +86,3 @@ jobs:
           asset_name: FlixFix.apk
           asset_content_type: application/zip
 
-      - name: Delete Release
-        uses: peter-evans/delete-release@v2
-        with:
-          token: ${{ secrets.TOKEN }}
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.repository }}
-          tag_name: v0-latest
