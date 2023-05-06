@@ -73,7 +73,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
-          upload_url: ${{ steps.get_apk_path.outputs.apk_path }}
-          asset_path: artifacts/Flixfix.apk
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.get_apk_path.outputs.apk_path }}
           asset_name: FlixFix.apk
           asset_content_type: application/zip
