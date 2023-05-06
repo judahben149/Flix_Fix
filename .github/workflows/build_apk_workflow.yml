@@ -62,8 +62,8 @@ jobs:
         uses: actions/delete-release@v1
         with:
           token: ${{ secrets.TOKEN }}
-          owner: ${{ github.repository_owner }}
-          repo: ${{ github.repository }}
+          owner: judahben149
+          repo: Flix_Fix
           tag_name: v0-latest
 
       - name: Create Another Release
@@ -71,7 +71,7 @@ jobs:
         uses: actions/create-release@v1
         with:
           tag_name: v0-latest
-          release_name: Development v0-latest
+          release_name: Latest apk
           files: Flixfix/Flixfix.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
