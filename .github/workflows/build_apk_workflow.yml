@@ -62,8 +62,8 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: v1.0.0.4
-          release_name: Release  v1.0.0.4
+          tag_name: v0-latest
+          release_name: Development v0-latest
           files: Flixfix/Flixfix.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -77,3 +77,11 @@ jobs:
           asset_path: ${{ steps.get_apk_path.outputs.apk_path }}
           asset_name: FlixFix.apk
           asset_content_type: application/zip
+
+      - name: Delete Release
+        uses: peter-evans/delete-release@v2
+        with:
+          token: ${{ secrets.TOKEN }}
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.repository }}
+          tag_name: v0-latest
