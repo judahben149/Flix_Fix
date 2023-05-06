@@ -1,12 +1,14 @@
 package com.judahben149.flixfix.di
 
 import android.content.Context
+import com.judahben149.flixfix.BuildConfig
 import com.judahben149.flixfix.R
 import com.judahben149.flixfix.data.local.MovieDao
 import com.judahben149.flixfix.data.remote.ApiClient
 import com.judahben149.flixfix.data.remote.MoviesService
 import com.judahben149.flixfix.data.repository.MovieRepositoryImpl
 import com.judahben149.flixfix.utils.Constants
+import com.judahben149.flixfix.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +19,9 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import kotlin.math.log
 
 @Module
 @InstallIn(SingletonComponent::class)

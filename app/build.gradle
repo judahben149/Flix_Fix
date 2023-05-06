@@ -16,6 +16,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField ("String", "API_KEY", getApiKey())
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -37,6 +39,9 @@ android {
     }
     kapt {
         correctErrorTypes true
+    }
+    lintOptions {
+        lintConfig = file("$rootDir/glide_notification_lint_ignore.xml")
     }
 }
 
@@ -106,4 +111,11 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.room:room-paging:$room_version"
 
+}
+
+String getApiKey() {
+    def propFile = rootProject.file("./local.properties")
+    def properties = new Properties()
+    properties.load(new FileInputStream(propFile))
+    return properties['TMDB_API_KEY']
 }
