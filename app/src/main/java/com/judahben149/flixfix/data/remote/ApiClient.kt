@@ -1,8 +1,5 @@
-package com.judahben149.flixfix.data.api
+package com.judahben149.flixfix.data.remote
 
-import android.util.Log
-import com.judahben149.flixfix.data.api.response.DiscoverMoviesDto
-import retrofit2.Response
 import javax.inject.Inject
 
 class ApiClient @Inject constructor(private val moviesService: MoviesService) {

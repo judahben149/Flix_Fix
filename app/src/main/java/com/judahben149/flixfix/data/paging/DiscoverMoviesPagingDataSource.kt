@@ -1,14 +1,13 @@
-package com.judahben149.flixfix.data
+package com.judahben149.flixfix.data.paging
 
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.judahben149.flixfix.data.api.MoviesService
-import com.judahben149.flixfix.data.api.response.DiscoverMoviesDataDto
+import com.judahben149.flixfix.data.remote.MoviesService
+import com.judahben149.flixfix.data.remote.response.DiscoverMoviesDataDto
+import com.judahben149.flixfix.utils.Constants.STARTING_PAGE_INDEX
 import okio.IOException
 import retrofit2.HttpException
-
-private const val STARTING_PAGE_INDEX = 1
 
 class DiscoverMoviesPagingDataSource(private val service: MoviesService): PagingSource<Int, DiscoverMoviesDataDto>() {
 

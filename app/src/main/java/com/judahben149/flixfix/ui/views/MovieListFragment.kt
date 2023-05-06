@@ -51,7 +51,6 @@ class MovieListFragment : Fragment() {
 
     private fun initViews() {
         adapter = MovieListAdapter(requireContext()) { id ->
-//            Toast.makeText(requireContext(), id.toString(), Toast.LENGTH_SHORT).show()
             val bundle = Bundle()
             bundle.putInt("MOVIE_ID", id)
             findNavController().navigate(R.id.MovieDetailFragment, bundle)
@@ -71,7 +70,7 @@ class MovieListFragment : Fragment() {
     private fun collectMovieList() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.movieList.collect {
+                viewModel.movieListCached.collect {
                     adapter.submitData(pagingData = it)
                 }
             }

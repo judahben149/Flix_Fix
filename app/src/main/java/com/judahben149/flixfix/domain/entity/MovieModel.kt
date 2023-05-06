@@ -1,9 +1,9 @@
 package com.judahben149.flixfix.domain.entity
 
-import com.judahben149.flixfix.data.api.response.GenreX
-import com.judahben149.flixfix.data.api.response.SpokenLanguage
+import com.judahben149.flixfix.data.remote.response.GenreX
+import com.judahben149.flixfix.data.remote.response.SpokenLanguage
 
-data class MovieDetailedEntity(
+data class MovieModel(
 
     val adult: Boolean = false,
     val backdrop_path: String = "",

@@ -58,6 +58,7 @@
             android:maxLines="2"
             android:textColor="@color/white"
             android:textSize="23sp"
+            android:paddingHorizontal="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_poster_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.3"

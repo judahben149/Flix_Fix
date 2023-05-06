@@ -1,4 +1,4 @@
-package com.judahben149.flixfix.data.api.response
+package com.judahben149.flixfix.data.remote.response
 
 data class MovieDto(
     val adult: Boolean,
