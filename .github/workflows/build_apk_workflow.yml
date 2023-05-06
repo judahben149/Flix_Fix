@@ -39,7 +39,7 @@ jobs:
           name: apk
           path: app/build/outputs/apk/release/app-release-unsigned.apk
       - name: Download Apk from build
-        uses: actions/downlaod-artifact@v1
+        uses: actions/download-artifact@v1
         with:
           name: apk
       - name: Create Release
