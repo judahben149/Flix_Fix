@@ -15,34 +15,48 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+
       - name: Access TMDB_API_KEY
         env:
           TMDB_API_KEY: $
         run: echo TMDB_API_KEY=\"TMDB_API_KEY\" > ./local.properties
+
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: '11'
           cache: gradle
+
       - name: Set execution flag for gradlew
         run: chmod +x gradlew
+
       - name: Build with Gradle
         run: ./gradlew build
+
       - name: Build APK
         run: ./gradlew assembleRelease
+
       - name: Print APK directory contents
         run: ls -R app/build/outputs/apk/release/
+
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
           name: Flixfix
           path: app/build/outputs/apk/release/app-release-unsigned.apk
+
       - name: Download Apk from build
         uses: actions/download-artifact@v1
         with:
           name: Flixfix
           path: artifacts
+
+      - name: Get APK path
+        id: get_apk_path
+        run: |
+          apk_path=$(find app/build/outputs/apk/ -name "*.apk" -type f)
+          echo "::set-output name=apk_path::$apk_path"
 
       - name: Create Release
         id: create_release
@@ -53,12 +67,13 @@ jobs:
           files: Flixfix/Flixfix.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.get_apk_path.outputs.apk_path }}
           asset_path: artifacts/Flixfix.apk
           asset_name: FlixFix.apk
           asset_content_type: application/zip
