@@ -36,12 +36,12 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
-          name: apk
+          name: FlixFix
           path: app/build/outputs/apk/release/app-release-unsigned.apk
       - name: Download Apk from build
         uses: actions/download-artifact@v1
         with:
-          name: apk
+          name: FlixFix
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -56,6 +56,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: apk/app-release-unsigned.apk
+          asset_path: FlixFix/FlixFix.apk
           asset_name: FlixFix.apk
           asset_content_type: application/zip
