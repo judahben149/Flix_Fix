@@ -58,11 +58,11 @@ jobs:
           apk_path=$(find app/build/outputs/apk/ -name "*.apk" -type f)
           echo "::set-output name=apk_path::$apk_path"
 
-      - name: Delete Previous Release
-        uses: ahebrank/delete-release@v1.2.0
-        with:
-          token: ${{ secrets.TOKEN }}
-          tag_name: v0-latest
+#      - name: Delete Previous Release
+#        uses: ahebrank/delete-release@v1.2.0
+#        with:
+#          token: ${{ secrets.TOKEN }}
+#          tag_name: v0-latest
 #          owner: judahben149
 #          repo: Flix_Fix
 
