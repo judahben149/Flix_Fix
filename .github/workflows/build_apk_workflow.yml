@@ -59,7 +59,7 @@ jobs:
           echo "::set-output name=apk_path::$apk_path"
 
       - name: Delete Previous Release
-        uses: marvinpinto/action-automatic-releases@latest
+        uses: ahebrank/delete-release@v1.2.0
         with:
           token: ${{ secrets.TOKEN }}
           tag_name: v0-latest
