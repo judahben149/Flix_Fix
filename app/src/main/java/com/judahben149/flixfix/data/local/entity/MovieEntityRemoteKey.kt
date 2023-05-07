@@ -3,12 +3,11 @@ package com.judahben149.flixfix.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "remote_keys")
 data class MovieEntityRemoteKey(
 
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val prev: Int?,
-    val next: Int?,
-
+    val next: Int?
 )
