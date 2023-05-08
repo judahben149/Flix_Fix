@@ -20,14 +20,4 @@ interface MovieDao {
 
     @Query("DELETE FROM MovieListEntity")
     suspend fun deleteAllArticles()
-
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllRemoteKeys(movieEntityRemoteKeys: List<MovieEntityRemoteKey>)
-
-    @Query("SELECT * FROM MovieEntityRemoteKey WHERE id = :id")
-    suspend fun getAllRemoteKeys(id: Int): MovieEntityRemoteKey?
-
-    @Query("DELETE FROM MovieEntityRemoteKey")
-    suspend fun deleteAllRemoteKeys()
 }

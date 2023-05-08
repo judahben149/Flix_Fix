@@ -30,7 +30,7 @@ object Modules {
     @Singleton
     @Provides
     fun providesHttpClient(@ApplicationContext context: Context): OkHttpClient {
-        val apiKey = context.getString(R.string.api_key)
+        val apiKey = BuildConfig.API_KEY
 
         val loggingInterceptor = HttpLoggingInterceptor()
 
