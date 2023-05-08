@@ -27,10 +27,9 @@ object DatabaseModule {
         ).build()
     }
 
-    @Provides
-    @Singleton
-    fun providesMovieDao(database: MovieDatabase): MovieDao {
-        return database.movieDao()
-    }
-
+//    @Provides
+//    @Singleton
+//    fun providesMovieDao(database: MovieDatabase): MovieDao {
+//        return database.movieDao()
+//    }
 }
